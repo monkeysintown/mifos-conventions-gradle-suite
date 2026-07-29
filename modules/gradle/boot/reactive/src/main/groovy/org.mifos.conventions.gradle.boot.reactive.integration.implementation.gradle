@@ -1,0 +1,9 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.core.integration.implementation"
+}
+
+dependencies {
+    implementation "org.apache.camel.springboot:camel-reactive-streams-starter"
+
+    testImplementation "org.mifos.commons.boot:mifos-commons-boot-testing:0.1.0-SNAPSHOT"
+}

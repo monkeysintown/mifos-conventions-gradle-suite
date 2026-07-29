@@ -1,0 +1,29 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.core.cli.implementation"
+    id "org.asciidoctor.jvm.convert"
+}
+
+var pkg = ext["mifos.projects.base.package"]
+var type = project.layout.projectDirectory.asFile.parentFile.name
+var category = project.layout.projectDirectory.asFile.parentFile.parentFile.parentFile.name
+// var clazz = pkg  + "." + category + ".application." + type + ".implementation.Main"
+var clazz = "org.mifos.mfg.infrastructure.application.cli.implementation.Main"
+
+dependencies {
+    api "org.mifos.commons.boot:mifos-commons-boot-cli-pico:0.1.0-SNAPSHOT"
+    api "info.picocli:picocli-spring-boot-starter"
+    annotationProcessor "info.picocli:picocli-codegen"
+}
+
+println "PICO MAIN: ${clazz}!!!"
+
+tasks.register("generateManpageAsciiDoc", JavaExec) {
+    group = "documentation"
+    description = "Generate Mifos command line manpages"
+
+    classpath(configurations.compileClasspath, configurations.annotationProcessor, sourceSets.main.runtimeClasspath)
+
+    mainClass = "picocli.codegen.docgen.manpage.ManPageGenerator"
+    jvmArgs = ["--enable-native-access=ALL-UNNAMED"]
+    args = [clazz, "--outdir=${project.layout.buildDirectory.get()}/generated-picocli-docs", "-v", "--template-dir=src/docs/mantemplates"]
+}

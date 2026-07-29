@@ -1,0 +1,11 @@
+plugins {
+    id "org.mifos.conventions.gradle.base.plugin"
+}
+
+description = "Mifos Initiative - Conventions - Gradle - Boot - Core"
+
+group = "org.mifos.conventions.gradle"
+
+dependencies {
+    api "org.openapi.generator:org.openapi.generator.gradle.plugin:7.22.0"
+}

@@ -1,0 +1,21 @@
+plugins {
+    id "org.mifos.conventions.gradle.base.plugin"
+}
+
+description = "Mifos Initiative - Conventions - Gradle - Template"
+
+group = "org.mifos.conventions.gradle"
+
+dependencies {
+    // implementation "tools.jackson.dataformat:jackson-dataformat-yaml"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml"
+}
+
+gradlePlugin {
+    plugins {
+        MifosGradleTemplatePlugin {
+            id = "org.mifos.conventions.gradle.template"
+            implementationClass = "org.mifos.conventions.gradle.template.MifosGradleTemplatePlugin"
+        }
+    }
+}

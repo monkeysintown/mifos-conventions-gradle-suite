@@ -1,0 +1,8 @@
+package {{ otherPackageNameX }}
+
+{{ inceptionYear }} {{ yetAnotherParam }}
+
+
+public final {{ otherClassNameXXX }}Properties {{ '{' }}
+    // TODO: implement this!
+{{ '}' }}

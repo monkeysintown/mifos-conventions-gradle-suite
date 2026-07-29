@@ -1,0 +1,7 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.core.integration.implementation"
+}
+
+dependencies {
+    testImplementation "org.mifos.commons.boot:mifos-commons-boot-testing:0.1.0-SNAPSHOT"
+}
