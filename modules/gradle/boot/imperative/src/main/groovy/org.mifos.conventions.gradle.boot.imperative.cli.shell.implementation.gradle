@@ -1,0 +1,8 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.core.cli.implementation"
+}
+
+dependencies {
+    api "org.mifos.commons.boot:mifos-commons-boot-cli-shell:0.1.0-SNAPSHOT"
+    api "org.springframework.shell:spring-shell-starter"
+}

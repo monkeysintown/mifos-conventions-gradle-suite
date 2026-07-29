@@ -1,0 +1,5 @@
+plugins {
+    id "org.mifos.conventions.gradle.base.doc"
+}
+
+description = "Mifos Initiative - Conventions - Gradle - Doc"

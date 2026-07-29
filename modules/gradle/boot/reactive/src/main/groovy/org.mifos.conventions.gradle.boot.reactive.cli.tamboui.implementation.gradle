@@ -1,0 +1,10 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.core.cli.implementation"
+}
+
+dependencies {
+    api "dev.tamboui:tamboui-toolkit"
+    api "dev.tamboui:tamboui-css"
+    api "dev.tamboui:tamboui-aesh-backend"
+    api "dev.tamboui:tamboui-image"
+}

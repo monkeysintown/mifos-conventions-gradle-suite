@@ -1,0 +1,7 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.core.core"
+}
+
+dependencies {
+    api "io.projectreactor:reactor-core"
+}
