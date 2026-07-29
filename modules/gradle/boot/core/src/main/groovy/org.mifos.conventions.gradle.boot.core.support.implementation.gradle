@@ -1,0 +1,9 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.core"
+}
+
+dependencies {
+    // TODO: fix this; this build module should reside in a separate Git repo
+    implementation "org.mifos.commons.boot:mifos-commons-boot-service:0.1.0-SNAPSHOT"
+    implementation "org.springframework:spring-context"
+}

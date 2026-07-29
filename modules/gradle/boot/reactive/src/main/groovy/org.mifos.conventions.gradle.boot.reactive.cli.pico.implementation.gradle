@@ -1,0 +1,7 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.core.cli.implementation"
+}
+
+dependencies {
+    api "info.picocli:picocli-spring-boot-starter"
+}

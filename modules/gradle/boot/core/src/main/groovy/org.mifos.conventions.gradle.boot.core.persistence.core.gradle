@@ -1,0 +1,8 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.core"
+}
+
+dependencies {
+    compileOnly "org.springframework.boot:spring-boot"
+    annotationProcessor "com.infobip:infobip-spring-data-jdbc-annotation-processor"
+}

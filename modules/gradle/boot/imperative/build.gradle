@@ -1,0 +1,11 @@
+plugins {
+    id "org.mifos.conventions.gradle.base.plugin"
+}
+
+description = "Mifos Initiative - Gradle Conventions - Project - Boot - Imperative"
+
+group = "org.mifos.conventions.gradle"
+
+dependencies {
+    api project(":mifos-conventions-gradle-boot-layout")
+}

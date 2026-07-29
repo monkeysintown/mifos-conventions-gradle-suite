@@ -1,0 +1,4 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.imperative.application.implementation"
+    id "org.mifos.conventions.gradle.boot.core.application.cli.implementation"
+}

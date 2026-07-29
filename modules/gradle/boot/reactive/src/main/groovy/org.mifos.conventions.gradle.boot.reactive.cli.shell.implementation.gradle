@@ -1,0 +1,7 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.core.cli.implementation"
+}
+
+dependencies {
+    api "org.springframework.shell:spring-shell-starter"
+}
