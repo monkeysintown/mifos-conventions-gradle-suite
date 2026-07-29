@@ -1,0 +1,7 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.core.starter"
+}
+
+// dependencies {
+//     implementation "org.mifos.commons.boot:mifos-commons-boot-starter-imperative:0.1.0-SNAPSHOT"
+// }

@@ -1,0 +1,12 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.core"
+    id "org.mifos.conventions.gradle.boot.core.mapping"
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot"
+    implementation "org.springframework.data:spring-data-commons"
+    api "tools.jackson.core:jackson-databind"
+    // annotationProcessor "com.querydsl:querydsl-spatial"
+    annotationProcessor "org.mapstruct:mapstruct-processor"
+}

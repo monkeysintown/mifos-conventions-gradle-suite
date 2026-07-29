@@ -1,0 +1,24 @@
+plugins {
+    id "org.mifos.conventions.gradle.base.plugin"
+}
+
+description = "Mifos Initiative - Conventions - Gradle - Workflow - Generator"
+
+group = "org.mifos.conventions.gradle"
+
+dependencies {
+    implementation "com.github.javaparser:javaparser-core"
+
+    testImplementation "org.springframework:spring-web"
+    testImplementation "jakarta.validation:jakarta.validation-api"
+    testImplementation "com.fasterxml.jackson.core:jackson-annotations"
+}
+
+gradlePlugin {
+    plugins {
+        MifosGradleWorkflowGeneratorPlugin {
+            id = "org.mifos.conventions.gradle.workflow.generator"
+            implementationClass = "org.mifos.conventions.gradle.template.MifosGradleWorkflowGeneratorPlugin"
+        }
+    }
+}

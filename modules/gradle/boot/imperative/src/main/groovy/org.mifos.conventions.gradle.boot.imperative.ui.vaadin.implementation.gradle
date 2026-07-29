@@ -1,0 +1,7 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.core.ui.implementation"
+}
+
+dependencies {
+    implementation "com.vaadin:vaadin-core"
+}

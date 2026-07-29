@@ -1,0 +1,58 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral().content {
+            excludeModule("javax.media", "jai_core")
+        }
+        gradlePluginPortal()
+        maven {
+            url = uri("https://central.sonatype.com/repository/maven-snapshots")
+        }
+        maven {
+            url = uri("https://mifos.jfrog.io/artifactory/mifosx-gradle-local")
+        }
+    }
+
+    dependencies {
+        classpath "org.mifos.conventions.gradle:mifos-conventions-gradle-base-plugin:0.1.0-SNAPSHOT"
+    }
+}
+
+apply plugin: "org.mifos.conventions.gradle.base.layout"
+
+rootProject.name = "mifos-conventions-gradle-suite"
+
+mifos {
+    project {
+        groupId = "org.mifos.conventions.gradle"
+        description = "Mifos Initiative - Conventions - Gradle - Suite"
+        basePackage = "org.mifos.conventions.gradle"
+        inceptionYear = "2026"
+    }
+    developers {
+        "vidakovic" {
+            firstname = "Aleksandar"
+            lastname = "Vidakovic"
+            email = "aleks@mifos.org"
+            timezone = "UTC+2"
+            roles = ["developer", "architect"]
+        }
+    }
+}
+
+include(":mifos-conventions-gradle-doc")
+project(":mifos-conventions-gradle-doc").projectDir = file("${rootDir}/modules/gradle/doc")
+include(":mifos-conventions-gradle-boot-core")
+project(":mifos-conventions-gradle-boot-core").projectDir = file("${rootDir}/modules/gradle/boot/core")
+include(":mifos-conventions-gradle-boot-imperative")
+project(":mifos-conventions-gradle-boot-imperative").projectDir = file("${rootDir}/modules/gradle/boot/imperative")
+include(":mifos-conventions-gradle-boot-reactive")
+project(":mifos-conventions-gradle-boot-reactive").projectDir = file("${rootDir}/modules/gradle/boot/reactive")
+include(":mifos-conventions-gradle-boot-layout")
+project(":mifos-conventions-gradle-boot-layout").projectDir = file("${rootDir}/modules/gradle/boot/layout")
+include(":mifos-conventions-gradle-template")
+project(":mifos-conventions-gradle-template").projectDir = file("${rootDir}/modules/gradle/template")
+include(":mifos-conventions-gradle-workflow-generator")
+project(":mifos-conventions-gradle-workflow-generator").projectDir = file("${rootDir}/modules/gradle/workflow/generator")
+include(":mifos-conventions-gradle-lint")
+project(":mifos-conventions-gradle-lint").projectDir = file("${rootDir}/modules/gradle/lint")

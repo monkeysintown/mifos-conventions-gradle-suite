@@ -1,0 +1,14 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.core.application.implementation"
+}
+
+dependencies {
+    // TODO: this is just to make the applications work for now; remove later
+    implementation "io.r2dbc:r2dbc-h2"
+    // implementation "io.projectreactor.tools:blockhound"
+
+    // testImplementation "io.projectreactor.tools:blockhound-junit-platform"
+    testImplementation "io.projectreactor:reactor-test"
+    testImplementation "org.testcontainers:r2dbc"
+    testImplementation "org.mifos.commons.boot:mifos-commons-boot-testing:0.1.0-SNAPSHOT"
+}
