@@ -1,0 +1,8 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.core.transport.implementation"
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-webmvc"
+    implementation "org.springframework.grpc:spring-grpc-server-spring-boot-starter"
+}

@@ -1,0 +1,7 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.core.mapping"
+}
+
+dependencies {
+    api "org.mifos.commons.boot:mifos-commons-boot-mapping:0.1.0-SNAPSHOT"
+}

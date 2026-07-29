@@ -1,0 +1,7 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.core.mapping"
+}
+
+dependencies {
+    implementation "org.springframework:spring-context"
+}

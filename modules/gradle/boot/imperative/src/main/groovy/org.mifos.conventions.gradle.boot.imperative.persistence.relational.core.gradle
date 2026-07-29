@@ -1,0 +1,11 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.core.persistence.core"
+}
+
+dependencies {
+    api "org.springframework.boot:spring-boot-starter-data-jdbc"
+    api "com.infobip:infobip-spring-data-jdbc-querydsl-boot-starter"
+    api "io.github.openfeign.querydsl:querydsl-sql-spatial"
+    api "io.github.openfeign.querydsl:querydsl-collections"
+    api "org.mifos.commons.boot:mifos-commons-boot-persistence-relational-imperative:0.1.0-SNAPSHOT"
+}

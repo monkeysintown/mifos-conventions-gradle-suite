@@ -1,0 +1,20 @@
+plugins {
+    id "org.mifos.conventions.gradle.base.plugin"
+}
+
+description = "Mifos Initiative - Gradle Conventions - Project - Boot - Layout"
+
+group = "org.mifos.conventions.gradle"
+
+dependencies {
+    api project(":mifos-conventions-gradle-boot-core")
+}
+
+gradlePlugin {
+    plugins {
+        MifosProjectBootLayoutPlugin {
+            id = "org.mifos.conventions.gradle.boot.layout"
+            implementationClass = "org.mifos.conventions.gradle.boot.layout.MifosGradleBootLayoutPlugin"
+        }
+    }
+}

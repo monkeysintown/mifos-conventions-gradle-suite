@@ -1,0 +1,3 @@
+plugins {
+    id "org.mifos.conventions.gradle.boot.core.integration.core"
+}
