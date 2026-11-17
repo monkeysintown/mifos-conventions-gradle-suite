@@ -3,5 +3,6 @@ plugins {
 }
 
 dependencies {
+    api "org.mifos.commons:mifos-commons-boot-operation-core:0.1.0-SNAPSHOT"
     compileOnly "org.springframework.boot:spring-boot"
 }

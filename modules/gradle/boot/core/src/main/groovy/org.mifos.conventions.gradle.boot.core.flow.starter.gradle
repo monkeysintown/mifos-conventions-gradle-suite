@@ -3,6 +3,7 @@ plugins {
 }
 
 dependencies {
+    implementation "org.mifos.commons:mifos-commons-boot-operation-starter:0.1.0-SNAPSHOT"
     implementation "org.springframework.boot:spring-boot-starter"
     implementation "org.springframework.boot:spring-boot-autoconfigure"
 }
