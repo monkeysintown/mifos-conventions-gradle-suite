@@ -3,7 +3,5 @@ plugins {
 }
 
 dependencies {
-    // TODO: fix this; this build module should reside in a separate Git repo
-    implementation "org.mifos.commons:mifos-commons-boot-service:0.1.0-SNAPSHOT"
     implementation "org.springframework:spring-context"
 }

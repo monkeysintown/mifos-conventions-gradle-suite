@@ -6,7 +6,6 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-data-jdbc"
     implementation "org.springframework.boot:spring-boot-starter-liquibase"
     implementation "org.postgresql:postgresql"
-    implementation "org.postgresql:postgresql"
     implementation "net.postgis:postgis-jdbc"
     implementation "net.postgis:postgis-jdbc-jts"
     implementation "net.postgis:postgis-jdbc-java2d"

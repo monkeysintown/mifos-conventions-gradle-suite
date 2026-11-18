@@ -60,6 +60,15 @@ application {
     mainClass = clazz
 }
 
+distributions {
+    main {
+        contents {
+            // same jar file name can arrive via different dependency paths (e.g. project + external module)
+            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        }
+    }
+}
+
 bootJar {
     mainClass = clazz
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE

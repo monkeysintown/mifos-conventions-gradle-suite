@@ -4,8 +4,8 @@ plugins {
 
 dependencies {
     // TODO: fix this; flow module exposes implementation details; maybe move interfaces to core
-    api "org.mifos.commons:mifos-commons-boot-core:0.1.0-SNAPSHOT"
-    api "org.mifos.commons:mifos-commons-boot-core:0.1.0-SNAPSHOT"
+    api "org.mifos.commons:mifos-commons-boot-operation-core:0.1.0-SNAPSHOT"
+    api "org.mifos.commons:mifos-commons-boot-operation-flow:0.1.0-SNAPSHOT"
     // api "io.micrometer:micrometer-core"
     api "jakarta.validation:jakarta.validation-api"
     api "javax.measure:unit-api"

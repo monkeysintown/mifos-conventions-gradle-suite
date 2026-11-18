@@ -124,64 +124,59 @@ public class MifosGradleBootLayoutPlugin implements Plugin<Settings> {
                                 .projectId(projectId)
                                 .projectDir(projectDir);
 
-                        var m =
-                                switch (type) {
-                                    case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_DOC_SUFFIX ->
-                                        module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_DOC_PLUGIN_ID)
-                                                .build();
-                                    case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_SDK_SUFFIX ->
-                                        module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_SDK_PLUGIN_ID_TEMPLATE.formatted(
-                                                        classifier, last))
-                                                .build();
-                                    case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_SUPPORT_SUFFIX ->
-                                        module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_SUPPORT_PLUGIN_ID_TEMPLATE.formatted(
-                                                        classifier, last))
-                                                .build();
-                                    case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_SERVICE_SUFFIX ->
-                                        module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_SERVICE_PLUGIN_ID_TEMPLATE.formatted(
-                                                        classifier, last))
-                                                .build();
-                                    case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_USECASE_SUFFIX ->
-                                        module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_USECASE_PLUGIN_ID_TEMPLATE.formatted(
-                                                        classifier, last))
-                                                .build();
-                                    case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_FLOW_SUFFIX ->
-                                        module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_FLOW_PLUGIN_ID_TEMPLATE.formatted(
-                                                        classifier, last))
-                                                .build();
-                                    case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_INTEGRATION_SUFFIX ->
-                                        module.pluginId(
-                                                        MIFOS_PROJECT_BOOT_LAYOUT_INTEGRATION_PLUGIN_ID_TEMPLATE
-                                                                .formatted(classifier, last))
-                                                .build();
-                                    case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_PERSISTENCE_SUFFIX ->
-                                        module.pluginId(
-                                                        MIFOS_PROJECT_BOOT_LAYOUT_PERSISTENCE_PLUGIN_ID_TEMPLATE
-                                                                .formatted(classifier, secondLast, last))
-                                                .build();
-                                    case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_TRANSPORT_SUFFIX ->
-                                        module.pluginId(
-                                                        MIFOS_PROJECT_BOOT_LAYOUT_TRANSPORT_PLUGIN_ID_TEMPLATE
-                                                                .formatted(classifier, secondLast, last))
-                                                .build();
-                                    case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_UI_SUFFIX ->
-                                        module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_UI_PLUGIN_ID_TEMPLATE.formatted(
-                                                        classifier, thirdLast, last))
-                                                .build();
-                                    case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_CLI_SUFFIX ->
-                                        module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_CLI_PLUGIN_ID_TEMPLATE.formatted(
-                                                        classifier, thirdLast, last))
-                                                .build();
-                                    case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_APPLICATION_SUFFIX ->
-                                        module.pluginId(
-                                                        MIFOS_PROJECT_BOOT_LAYOUT_APPLICATION_PLUGIN_ID_TEMPLATE
-                                                                .formatted(classifier, secondLast))
-                                                .build();
-                                    default ->
-                                        module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_PLUGIN_ID_TEMPLATE.formatted(
-                                                        classifier, last))
-                                                .build();
-                                };
+                        var m = switch (type) {
+                            case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_DOC_SUFFIX ->
+                                module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_DOC_PLUGIN_ID)
+                                        .build();
+                            case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_SDK_SUFFIX ->
+                                module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_SDK_PLUGIN_ID_TEMPLATE.formatted(
+                                                classifier, last))
+                                        .build();
+                            case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_SUPPORT_SUFFIX ->
+                                module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_SUPPORT_PLUGIN_ID_TEMPLATE.formatted(
+                                                classifier, last))
+                                        .build();
+                            case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_SERVICE_SUFFIX ->
+                                module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_SERVICE_PLUGIN_ID_TEMPLATE.formatted(
+                                                classifier, last))
+                                        .build();
+                            case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_USECASE_SUFFIX ->
+                                module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_USECASE_PLUGIN_ID_TEMPLATE.formatted(
+                                                classifier, last))
+                                        .build();
+                            case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_FLOW_SUFFIX ->
+                                module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_FLOW_PLUGIN_ID_TEMPLATE.formatted(
+                                                classifier, last))
+                                        .build();
+                            case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_INTEGRATION_SUFFIX ->
+                                module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_INTEGRATION_PLUGIN_ID_TEMPLATE.formatted(
+                                                classifier, last))
+                                        .build();
+                            case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_PERSISTENCE_SUFFIX ->
+                                module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_PERSISTENCE_PLUGIN_ID_TEMPLATE.formatted(
+                                                classifier, secondLast, last))
+                                        .build();
+                            case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_TRANSPORT_SUFFIX ->
+                                module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_TRANSPORT_PLUGIN_ID_TEMPLATE.formatted(
+                                                classifier, secondLast, last))
+                                        .build();
+                            case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_UI_SUFFIX ->
+                                module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_UI_PLUGIN_ID_TEMPLATE.formatted(
+                                                classifier, thirdLast, last))
+                                        .build();
+                            case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_CLI_SUFFIX ->
+                                module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_CLI_PLUGIN_ID_TEMPLATE.formatted(
+                                                classifier, thirdLast, last))
+                                        .build();
+                            case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_APPLICATION_SUFFIX ->
+                                module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_APPLICATION_PLUGIN_ID_TEMPLATE.formatted(
+                                                classifier, secondLast))
+                                        .build();
+                            default ->
+                                module.pluginId(MIFOS_PROJECT_BOOT_LAYOUT_PLUGIN_ID_TEMPLATE.formatted(
+                                                classifier, last))
+                                        .build();
+                        };
 
                         switch (type) {
                             case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_CORE_SUFFIX,

@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    implementation "org.mifos.commons:mifos-commons-boot-persistence-jpa-imperative:0.1.0-SNAPSHOT:0.1.0-SNAPSHOT"
+    implementation "org.mifos.commons:mifos-commons-boot-persistence-jpa-imperative:0.1.0-SNAPSHOT"
 
     // TODO: finish this!
 
