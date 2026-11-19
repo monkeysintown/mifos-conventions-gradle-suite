@@ -10,3 +10,22 @@ dependencies {
     annotationProcessor "org.mapstruct:mapstruct-processor"
     compileOnly "org.mapstruct:mapstruct-processor"
 }
+
+// Extracts the Mifos OpenAPI Generator templates (e.g. MifosUsecase wrappers for *Api classes) from this plugin's
+// jar into the build dir, so SDK generate tasks using the "mifos-spring" generator can find them via "templateDir".
+def mifosOpenApiResources = "/org/mifos/conventions/gradle/boot/core/openapi"
+def mifosOpenApiUsecaseTemplate = getClass().getResourceAsStream("${mifosOpenApiResources}/mifos-usecases.mustache").getText("UTF-8")
+def mifosOpenApiDir = layout.buildDirectory.dir("openapi/mifos")
+
+tasks.register("mifosOpenApiTemplates") {
+    group = "openapi tools"
+    description = "Extracts the Mifos OpenAPI Generator templates."
+    inputs.property("usecaseTemplate", mifosOpenApiUsecaseTemplate)
+    outputs.dir(mifosOpenApiDir)
+
+    doLast {
+        def dir = mifosOpenApiDir.get().asFile
+        new File(dir, "templates").mkdirs()
+        new File(dir, "templates/mifos-usecases.mustache").setText(mifosOpenApiUsecaseTemplate, "UTF-8")
+    }
+}

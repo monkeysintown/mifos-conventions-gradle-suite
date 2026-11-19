@@ -158,9 +158,11 @@ rootProject.name = "mifos-test"
                 SUCCESS,
                 requireNonNull(result.task(":" + MIFOS_TASK_TEMPLATE_BUNDLE)).getOutcome());
 
-        Files.list(projectDir.toPath().resolve("build", "distributions")).forEach(path -> {
-            log.error("FOUND: {}", path.toAbsolutePath());
-        });
+        try(var stream = Files.list(projectDir.toPath().resolve("build", "distributions"))) {
+            stream.forEach(path -> {
+                log.error("FOUND: {}", path.toAbsolutePath());
+            });
+        }
     }
 
     @Test

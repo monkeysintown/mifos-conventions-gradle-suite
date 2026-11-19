@@ -7,5 +7,7 @@ description = "Mifos Initiative - Conventions - Gradle - Boot - Core"
 group = "org.mifos.conventions.gradle"
 
 dependencies {
-    api "org.openapi.generator:org.openapi.generator.gradle.plugin:7.22.0"
+    api "org.openapi.generator:org.openapi.generator.gradle.plugin:7.27.0"
+    // MifosSpringCodegen extends the generator; keep in sync with the Gradle plugin version above
+    implementation "org.openapitools:openapi-generator:7.27.0"
 }

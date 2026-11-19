@@ -4,6 +4,8 @@ plugins {
 
 import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
 
+var mifosSdkUsecasesEnabled = (findProperty("mifos.projects.sdk.usecases.enabled") ?: "true").toString().toBoolean()
+
 if(file("${projectDir}/src/main/resources/openapi").exists()) {
     sourceSets.main.java.srcDirs += ["${projectDir}/build/generated/sources/openapi/src/main/java"]
 
@@ -13,13 +15,19 @@ if(file("${projectDir}/src/main/resources/openapi").exists()) {
 
         tasks.register("openApiGenerateMifosSdk${index}", GenerateTask) {
             group = "openapi tools"
-            generatorName = "spring"
+            // "mifos-spring" = "spring" + MifosUsecase wrappers for every *Api operation (MifosSpringCodegen)
+            generatorName = mifosSdkUsecasesEnabled ? "mifos-spring" : "spring"
             verbose = false
             validateSpec = false
             skipValidateSpec = true
             inputSpec = new File("${projectDir}/src/main/resources/openapi/${file.name}".toString())
             outputDir = new File("${projectDir}/build/generated/sources/openapi")
             // templateDir = "${projectDir}/src/main/resources/templates/java"
+            if(mifosSdkUsecasesEnabled) {
+                // generates one <OperationId>Usecase per operation (see MifosSpringCodegen, mifos-usecases.mustache)
+                templateDir = layout.buildDirectory.dir("openapi/mifos/templates").get().asFile.path
+                dependsOn "mifosOpenApiTemplates"
+            }
             groupId = "${project.group}"
             apiPackage = "${sdkBasePackage}.implementation".toString()
             invokerPackage = "${sdkBasePackage}.implementation.invoker".toString()
@@ -50,7 +58,9 @@ if(file("${projectDir}/src/main/resources/openapi").exists()) {
                     hideGenerationTimestamp: "true",
                     containerDefaultToNull: "true",
                     documentationProvider: "none",
-                    useTags: "true"
+                    useTags: "true",
+                    // MifosUsecase wrappers go to <sdkBasePackage>.<last segment of the OpenAPI tag>
+                    mifosUsecaseBasePackage: sdkBasePackage
             ]
             generateModelTests = false
             generateApiTests = false
@@ -107,6 +117,10 @@ dependencies {
         implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml"
 
         api "org.springframework.boot:spring-boot-starter-webmvc"
+
+        if(mifosSdkUsecasesEnabled) {
+            api "org.mifos.commons:mifos-commons-boot-operation-core:0.1.0-SNAPSHOT"
+        }
     }
 
     if(file("${projectDir}/src/main/resources/proto").exists()) {

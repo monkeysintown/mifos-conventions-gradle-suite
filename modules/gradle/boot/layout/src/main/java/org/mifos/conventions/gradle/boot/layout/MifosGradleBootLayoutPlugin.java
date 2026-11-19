@@ -180,20 +180,21 @@ public class MifosGradleBootLayoutPlugin implements Plugin<Settings> {
 
                         switch (type) {
                             case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_CORE_SUFFIX,
-                                    MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_MAPPING_SUFFIX,
-                                    MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_DATABIND_SUFFIX,
-                                    MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_STARTER_SUFFIX,
-                                    MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_DOC_SUFFIX:
+                                 MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_MAPPING_SUFFIX,
+                                 MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_DATABIND_SUFFIX,
+                                 MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_STARTER_SUFFIX,
+                                 MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_DOC_SUFFIX -> {
                                 mainModules
                                         .computeIfAbsent(category, k -> new HashMap<>())
                                         .put(type, m);
                                 mainModulesByPath.put(projectId, m);
-                                break;
-                            default:
+                            }
+                            default -> {
                                 modulesByCategory
                                         .computeIfAbsent(category, k -> new ArrayList<>())
                                         .add(m);
                                 modulesByPath.put(projectId, m);
+                            }
                         }
 
                         modulesByPathAll.put(projectId, m);
