@@ -48,7 +48,8 @@ if(file("${projectDir}/src/main/resources/openapi").exists()) {
                     useJakartaEe: "true",
                     hideGenerationTimestamp: "true",
                     containerDefaultToNull: "true",
-                    documentationProvider: "none"
+                    documentationProvider: "none",
+                    useTags: "true"
             ]
             generateModelTests = false
             generateApiTests = false
