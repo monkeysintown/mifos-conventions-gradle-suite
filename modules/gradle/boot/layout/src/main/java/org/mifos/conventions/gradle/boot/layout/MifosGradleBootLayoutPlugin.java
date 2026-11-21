@@ -180,10 +180,10 @@ public class MifosGradleBootLayoutPlugin implements Plugin<Settings> {
 
                         switch (type) {
                             case MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_CORE_SUFFIX,
-                                 MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_MAPPING_SUFFIX,
-                                 MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_DATABIND_SUFFIX,
-                                 MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_STARTER_SUFFIX,
-                                 MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_DOC_SUFFIX -> {
+                                    MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_MAPPING_SUFFIX,
+                                    MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_DATABIND_SUFFIX,
+                                    MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_STARTER_SUFFIX,
+                                    MIFOS_PROJECT_BOOT_LAYOUT_PROJECT_ID_DOC_SUFFIX -> {
                                 mainModules
                                         .computeIfAbsent(category, k -> new HashMap<>())
                                         .put(type, m);
@@ -213,41 +213,33 @@ public class MifosGradleBootLayoutPlugin implements Plugin<Settings> {
                 "*/doc/build.gradle",
                 "*/service/*/core/build.gradle",
                 "*/service/*/implementation/build.gradle",
-                "*/service/*/mapping/build.gradle",
                 "*/service/*/starter/build.gradle",
                 "*/usecase/*/core/build.gradle",
                 "*/usecase/*/implementation/build.gradle",
-                "*/usecase/*/mapping/build.gradle",
                 "*/usecase/*/starter/build.gradle",
                 "*/flow/*/core/build.gradle",
                 "*/flow/*/implementation/build.gradle",
-                "*/flow/*/mapping/build.gradle",
                 "*/flow/*/starter/build.gradle",
                 "*/sdk/*/core/build.gradle",
                 "*/sdk/*/implementation/build.gradle",
                 "*/sdk/*/starter/build.gradle",
                 "*/support/*/core/build.gradle",
                 "*/support/*/implementation/build.gradle",
-                "*/support/*/mapping/build.gradle",
                 "*/support/*/starter/build.gradle",
                 "*/persistence/*/core/build.gradle",
                 "*/persistence/*/implementation/build.gradle",
-                "*/persistence/*/mapping/build.gradle",
                 "*/persistence/*/starter/build.gradle",
                 "*/transport/*/core/build.gradle",
                 "*/transport/*/implementation/build.gradle",
-                "*/transport/*/mapping/build.gradle",
                 "*/transport/*/starter/build.gradle",
                 "*/ui/*/*/core/build.gradle",
                 "*/ui/*/*/implementation/build.gradle",
-                "*/ui/*/*/mapping/build.gradle",
                 "*/ui/*/*/starter/build.gradle",
                 "*/cli/*/*/core/build.gradle",
                 "*/cli/*/*/implementation/build.gradle",
                 "*/cli/*/*/starter/build.gradle",
                 "*/integration/*/core/build.gradle",
                 "*/integration/*/implementation/build.gradle",
-                "*/integration/*/mapping/build.gradle",
                 "*/integration/*/starter/build.gradle",
                 "*/application/*/implementation/build.gradle");
 

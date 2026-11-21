@@ -1,5 +1,6 @@
 plugins {
     id "org.mifos.conventions.gradle.boot.core"
+    id "org.mifos.conventions.gradle.boot.core.mapping"
 }
 
 // TODO: add dependencies

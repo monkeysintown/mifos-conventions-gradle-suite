@@ -1,3 +1,0 @@
-plugins {
-    id "org.mifos.conventions.gradle.boot.core.usecase.mapping"
-}

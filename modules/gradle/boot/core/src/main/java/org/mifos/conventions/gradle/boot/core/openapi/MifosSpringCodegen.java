@@ -7,6 +7,7 @@ package org.mifos.conventions.gradle.boot.core.openapi;
 
 import static org.openapitools.codegen.utils.StringUtils.camelize;
 
+import io.swagger.v3.oas.models.tags.Tag;
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -16,15 +17,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import io.swagger.v3.oas.models.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.openapitools.codegen.CodegenModel;
@@ -106,14 +105,15 @@ public class MifosSpringCodegen extends SpringCodegen {
 
                 for (var property : topLevelProperties(bodyModel)) {
                     var type = propertyType(bodyModel, property);
-                    var attribute = attribute(attributes, operation, property.name, type, property.required);
-                    bodyAssignments.add(new Arg(attribute, property.setter, false, converter(operation, attribute, property, type)));
+                    var attribute = attribute(attributes, property.name, type, property.required);
+                    bodyAssignments.add(new Arg(
+                            attribute, property.setter, false, converter(operation, attribute, property, type)));
                 }
                 // "mifosBody" is the local variable the template rebuilds the flattened body into
                 var bodyArg = apiExpectsOptional(param) ? "Optional.of(mifosBody)" : "mifosBody";
                 args.add(() -> bodyArg);
             } else {
-                var attribute = attribute(attributes, operation, param.paramName, paramType(param), param.required);
+                var attribute = attribute(attributes, param.paramName, paramType(param), param.required);
                 args.add(new Arg(attribute, null, apiExpectsOptional(param), null)::expression);
             }
         }
@@ -122,16 +122,22 @@ public class MifosSpringCodegen extends SpringCodegen {
 
         var ext = operation.vendorExtensions;
         ext.put("x-mifos-usecase-name", camelize(operation.operationId));
-        ext.put("x-mifos-usecase-attributes", attributes.values().stream().map(Attribute::toMap).toList());
+        ext.put(
+                "x-mifos-usecase-attributes",
+                attributes.values().stream().map(Attribute::toMap).toList());
         ext.put("x-mifos-usecase-args", argExpressions);
         ext.put("x-mifos-usecase-response", response(operation, models));
 
         if (bodyType != null) {
-            ext.put("x-mifos-usecase-body", Map.of(
-                    "type", bodyType,
-                    "assignments", bodyAssignments.stream()
-                            .map(a -> Map.of("setter", a.setter(), "value", a.expression()))
-                            .toList()));
+            ext.put(
+                    "x-mifos-usecase-body",
+                    Map.of(
+                            "type",
+                            bodyType,
+                            "assignments",
+                            bodyAssignments.stream()
+                                    .map(a -> Map.of("setter", a.setter(), "value", a.expression()))
+                                    .toList()));
         }
     }
 
@@ -148,11 +154,19 @@ public class MifosSpringCodegen extends SpringCodegen {
         data.put("usecasePackage", usecasePackage);
         data.put("usecaseClassname", usecaseName);
 
-        var file = Path.of(outputFolder(), getSourceFolder(), usecasePackage.replace('.', File.separatorChar), usecaseName + ".java").toFile();
+        var file = Path.of(
+                        outputFolder(),
+                        getSourceFolder(),
+                        usecasePackage.replace('.', File.separatorChar),
+                        usecaseName + ".java")
+                .toFile();
 
         if (!writtenUsecases.add(file)) {
-            log.warn("Use case {}.{} is generated more than once (operation '{}' in several tags?); overwriting it",
-                    usecasePackage, usecaseName, operation.operationId);
+            log.warn(
+                    "Use case {}.{} is generated more than once (operation '{}' in several tags?); overwriting it",
+                    usecasePackage,
+                    usecaseName,
+                    operation.operationId);
         }
 
         try {
@@ -191,7 +205,7 @@ public class MifosSpringCodegen extends SpringCodegen {
                 .findFirst()
                 .orElse(operation.baseName);
 
-        if(StringUtils.isNotEmpty(tag)) {
+        if (StringUtils.isNotEmpty(tag)) {
             var segments = TAG_SEPARATOR.split(tag.strip());
             var segment = segments.length == 0 ? "" : segments[segments.length - 1];
             segment = segment.toLowerCase(Locale.ROOT).replaceAll("[^a-z0-9_]", "");
@@ -213,7 +227,7 @@ public class MifosSpringCodegen extends SpringCodegen {
     }
 
     /// Returns the existing attribute with the same name (merging clashing inputs into one field) or creates one.
-    private Attribute attribute(Map<String, Attribute> attributes, CodegenOperation operation, String name, String type, boolean required) {
+    private Attribute attribute(Map<String, Attribute> attributes, String name, String type, boolean required) {
         var existing = attributes.get(name);
 
         if (existing == null) {
@@ -228,21 +242,32 @@ public class MifosSpringCodegen extends SpringCodegen {
     }
 
     /// Converts a merged attribute to the type of a body property when the clashing inputs have different types. Enum
-    /// properties (e.g. a `String` path parameter `idType` and a body property `IdTypeEnum idType`) are converted with
+    /// properties (e.g. a `String` path parameter `idType` and a body property `IdTypeEnum idType`) are converted
+    /// with
     /// the generated enum's `fromValue`; any other type mismatch is reported and left to the compiler.
-    private static String converter(CodegenOperation operation, Attribute attribute, CodegenProperty property, String type) {
+    private static String converter(
+            CodegenOperation operation, Attribute attribute, CodegenProperty property, String type) {
         if (attribute.type.equals(type)) {
             return null;
         }
 
         if ((property.isEnum && !property.isContainer) || property.isEnumRef) {
-            log.info("Operation '{}': input '{}' ({}) is converted to body property type {}",
-                    operation.operationId, attribute.name, attribute.type, type);
+            log.info(
+                    "Operation '{}': input '{}' ({}) is converted to body property type {}",
+                    operation.operationId,
+                    attribute.name,
+                    attribute.type,
+                    type);
             return type + "::fromValue";
         }
 
-        log.warn("Operation '{}': inputs named '{}' have different types ({} vs {}); keeping a single field of type {}",
-                operation.operationId, attribute.name, attribute.type, type, attribute.type);
+        log.warn(
+                "Operation '{}': inputs named '{}' have different types ({} vs {}); keeping a single field of type {}",
+                operation.operationId,
+                attribute.name,
+                attribute.type,
+                type,
+                attribute.type);
         return null;
     }
 
@@ -287,7 +312,8 @@ public class MifosSpringCodegen extends SpringCodegen {
     }
 
     /// Mirrors JavaSpring's `optionalDataType` partial: with `useOptional`, every non-required parameter is declared as
-    /// `Optional<T>` on the generated `*Api` interface (query, header, cookie, form fields and request bodies) except
+    /// `Optional<T>` on the generated `*Api` interface (query, header, cookie, form fields and request bodies)
+    /// except
     /// path variables and file uploads (`MultipartFile`).
     private boolean apiExpectsOptional(CodegenParameter param) {
         return booleanProperty("useOptional", false) && !param.required && !param.isPathParam && !param.isFile;
@@ -315,7 +341,8 @@ public class MifosSpringCodegen extends SpringCodegen {
             for (var property : topLevelProperties(model)) {
                 var attribute = new Attribute(property.name, propertyType(model, property), property.required);
                 attributes.add(attribute.toMap());
-                assignments.add(Map.of("setter", attribute.toMap().get("setter"), "value", "mifosResult." + property.getter + "()"));
+                assignments.add(Map.of(
+                        "setter", attribute.toMap().get("setter"), "value", "mifosResult." + property.getter + "()"));
             }
         } else {
             var attribute = new Attribute("value", type, false);
@@ -331,7 +358,9 @@ public class MifosSpringCodegen extends SpringCodegen {
 
     /// Java type of the `*Api` result (body), or `null` if the operation has no response body.
     private static String responseType(CodegenOperation operation) {
-        if (operation.returnType == null || "Void".equals(operation.returnType) || "void".equals(operation.returnType)) {
+        if (operation.returnType == null
+                || "Void".equals(operation.returnType)
+                || "void".equals(operation.returnType)) {
             return null;
         }
         if (operation.returnContainer == null) {
