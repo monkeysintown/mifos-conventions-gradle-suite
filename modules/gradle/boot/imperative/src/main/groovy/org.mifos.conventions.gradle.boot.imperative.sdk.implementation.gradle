@@ -10,7 +10,6 @@ if(file("${projectDir}/src/main/resources/openapi").exists()) {
     sourceSets.main.java.srcDirs += ["${projectDir}/build/generated/sources/openapi/src/main/java"]
 
     file("${projectDir}/src/main/resources/openapi").listFiles().eachWithIndex { file, index  ->
-        // var sdkBasePackage = findProperty("mifos.projects.sdk.base.package")?: "${ext["mifos.projects.base.package"]}.${project.layout.projectDirectory.asFile.parentFile.parentFile.parentFile.name}.sdk.${project.layout.projectDirectory.asFile.parentFile.name}".toString()
         var sdkBasePackage = "${ext["mifos.projects.base.package"]}.${project.layout.projectDirectory.asFile.parentFile.parentFile.parentFile.name}.sdk.${project.layout.projectDirectory.asFile.parentFile.name}".toString()
 
         tasks.register("openApiGenerateMifosSdk${index}", GenerateTask) {
@@ -60,7 +59,7 @@ if(file("${projectDir}/src/main/resources/openapi").exists()) {
                     documentationProvider: "none",
                     useTags: "true",
                     // MifosUsecase wrappers go to <sdkBasePackage>.<last segment of the OpenAPI tag>
-                    mifosUsecaseBasePackage: sdkBasePackage
+                    mifosUsecaseBasePackage: "${sdkBasePackage}.usecase".toString()
             ]
             generateModelTests = false
             generateApiTests = false

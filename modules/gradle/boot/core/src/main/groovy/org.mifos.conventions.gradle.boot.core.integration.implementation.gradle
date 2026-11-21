@@ -1,6 +1,7 @@
 plugins {
     id "org.mifos.conventions.gradle.boot.core"
     id "org.mifos.conventions.gradle.boot.core.mapping"
+    id "org.mifos.conventions.gradle.boot.core.test"
 }
 
 dependencies {

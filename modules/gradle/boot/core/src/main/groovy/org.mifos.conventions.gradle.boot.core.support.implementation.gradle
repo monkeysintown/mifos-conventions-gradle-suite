@@ -1,8 +1,10 @@
 plugins {
     id "org.mifos.conventions.gradle.boot.core"
     id "org.mifos.conventions.gradle.boot.core.mapping"
+    id "org.mifos.conventions.gradle.boot.core.test"
 }
 
 dependencies {
+    api "org.springframework.boot:spring-boot-starter"
     implementation "org.springframework:spring-context"
 }

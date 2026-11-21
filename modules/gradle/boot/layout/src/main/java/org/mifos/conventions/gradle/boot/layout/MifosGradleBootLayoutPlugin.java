@@ -92,7 +92,9 @@ public class MifosGradleBootLayoutPlugin implements Plugin<Settings> {
                 objects,
                 modulesPath,
                 details -> {
-                    if (details.isDirectory()) return;
+                    if (details.isDirectory()) {
+                        return;
+                    }
 
                     try {
                         var all = details.getRelativePath().getSegments();
